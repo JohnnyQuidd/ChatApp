@@ -1,0 +1,42 @@
+body {
+	background: #A5E5F2;
+}
+
+#title {
+    text-align: center;
+    font-size: 35px;
+    font-weight: 400px;
+}
+
+#content {
+    margin-top: 50px;
+    text-align: center;
+    width: 50%;
+}
+
+#message-panel{
+    height: 200px;
+    width: 50%;
+    margin-left: 25%;
+}
+
+#message {
+    height: 25px;
+    width: 50%;
+    margin-left: 25%;
+}
+
+#send {
+    margin-top: 10px;
+    margin-left: 25%;
+    text-align: center;
+    height: 30px;
+    width: 50%;
+    border-radius: 2%;
+}
+
+#logout {
+	margin-top: 30px;
+    height: 25px;
+    width: 100px;
+}
