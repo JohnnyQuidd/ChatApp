@@ -20,6 +20,18 @@ body {
     margin-left: 25%;
 }
 
+#clear {
+    margin-left: 75%;
+    width: 25%;
+}
+
+#receiver {
+    height: 25px;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 5px;
+}
+
 #message {
     height: 25px;
     width: 50%;
@@ -33,6 +45,21 @@ body {
     height: 30px;
     width: 50%;
     border-radius: 2%;
+}
+
+#onlineUsers {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#onlineUsers h2{
+    font-weight: 600;
+    font-size: 30px;
+}
+
+#onlineUsers p{
+    font-weight: 300;
+    font-size: 20px;
 }
 
 #logout {

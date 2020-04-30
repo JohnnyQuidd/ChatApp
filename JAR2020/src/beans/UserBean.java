@@ -3,6 +3,7 @@ package beans;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import javax.ws.rs.core.Response;
 import dto.UserDTO;
 import model.User;
 import repository.UserRepository;
+import ws.UserLoginEndPoint;
+import ws.UserLogoutEndPoint;
 
 
 @Stateless
@@ -29,6 +32,10 @@ import repository.UserRepository;
 public class UserBean {
 	private HashMap<String, Session> sessions = new HashMap<>();
 	private UserRepository userRepo = new UserRepository();
+	@EJB
+	private UserLoginEndPoint userSocket;
+	@EJB
+	private UserLogoutEndPoint userLogoutSocket;
 	
 	@POST
 	@Path("/login")
@@ -41,6 +48,7 @@ public class UserBean {
 			if(userDTO.getPassword().equals(user.getPassword())) {
 				request.getSession().setAttribute("username", user.getUsername());
 				sessions.put(user.getUsername(), session);
+				userSocket.notifyNewLogin(user.getUsername());
 				return Response.status(200).entity(user.getUsername()).build();
 			}
 			return Response.status(405).entity("Unauthorized").build();
@@ -88,6 +96,7 @@ public class UserBean {
 		for(String u : sessions.keySet()) {
 			if(u.equals(username)) {
 				sessions.remove(u);
+				userLogoutSocket.notifyNewLogout(username);
 				request.getSession().invalidate();
 				return Response.status(200).entity("Logged out").build();
 			}

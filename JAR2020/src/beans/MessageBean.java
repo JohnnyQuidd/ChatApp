@@ -45,6 +45,8 @@ public class MessageBean {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendMessageToUser(MessageDTO messageDTO, @Context HttpServletRequest request) {
 		Message message = formMessageOutOfDTO(messageDTO, request);
+		String username = messageDTO.getReceiverUsername();
+		ws.sendMessageToSpecificUser(username, message.getContent());
 		messageRepo.addNewMessage(messageDTO.getReceiverUsername(), message);
 		
 		return Response.status(200).build();
@@ -55,8 +57,6 @@ public class MessageBean {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendMessageToAllUsers(MessageDTO messageDTO, @Context HttpServletRequest request) {
 		Message message = formMessageOutOfDTO(messageDTO, request);
-		messageRepo.addNewMessage(message.getSender().getUsername(), message);
-		messageRepo.addNewMessage(message.getReceiver().getUsername(), message);
 		ws.echoTextMessage(message.getContent());
 		return Response.status(200).build();
 	}

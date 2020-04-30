@@ -11,13 +11,13 @@ import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
 import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
 
 @Singleton
-@ServerEndpoint("/ws/{username}")
+@ServerEndpoint("/ws/users/{username}")
 @LocalBean
-public class WSEndPoint {
+public class UserLoginEndPoint {
 	static Map<String, Session> sessions = new HashMap<>();
 	
 	@OnOpen
@@ -29,17 +29,16 @@ public class WSEndPoint {
 	}
 	
 	@OnMessage
-	public void echoTextMessage(String msg) {	
-		
+	public void notifyNewLogin(String username) {
 		try {
 	        for (String s : sessions.keySet()) {
-	        	sessions.get(s).getBasicRemote().sendText(msg);
+	        	sessions.get(s).getBasicRemote().sendText(username);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@OnClose
 	public void close(@PathParam("username") String username, Session session) {
 		sessions.remove(username);
@@ -50,18 +49,4 @@ public class WSEndPoint {
 		sessions.remove(username);
 		t.printStackTrace();
 	}
-	
-	public void sendMessageToSpecificUser(String username, String message) {
-		try {
-	        for (String s : sessions.keySet()) {
-	        	if(s.equals(username)) {
-	        		sessions.get(s).getBasicRemote().sendText(message);
-	        		break;
-	        	}        	
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 }
