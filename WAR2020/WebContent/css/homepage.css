@@ -21,8 +21,10 @@ body {
 }
 
 #clear {
-    margin-left: 75%;
-    width: 25%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 30px;
+    width: 10%;
 }
 
 #receiver {
@@ -53,6 +55,16 @@ body {
 }
 
 #onlineUsers h2{
+    font-weight: 600;
+    font-size: 30px;
+}
+
+#registeredUsers {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#registeredUsers h2{
     font-weight: 600;
     font-size: 30px;
 }

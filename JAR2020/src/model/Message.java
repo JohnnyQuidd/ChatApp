@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Message {
+@SuppressWarnings("serial")
+public class Message implements Serializable{
 	private User sender;
 	private User receiver;
 	private String subject;

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    // Get all logged in users
     let currentUsername = sessionStorage.getItem('username');
     $.ajax({
         url: 'rest/users/loggedIn',
@@ -15,6 +16,35 @@ $(document).ready(function(){
         }
     });
 
+    // Get all registered users
+    $.ajax({
+        url: 'rest/users/registered',
+        type: 'GET',
+        success: function(data) {
+            for(var i = 0; i < data.length; i++){
+                $('#registeredUsers').append('<p id="' + data[i].username + '">' + data[i].username + '</p>');
+            }
+        },
+        error: function(){
+            console.log('Cannot get all registered in users');
+        }
+    });
+
+    // Get all previous messages
+    $.ajax({
+        url: 'rest/messages/' + currentUsername,
+        type: 'GET',
+        success: function(data) {
+            for(var i = 0; i < data.length; i++){
+                //$('#message-panel').append('<p id="' + data[i].username + '">' + data[i].username + '</p>');
+                $('#message-panel').append(data[i].content + '\n');
+            }
+        },
+        error: function(){
+            console.log('Cannot get all previous messages');
+        }
+    });
+
     $('#logout').click(function(){
         let username = sessionStorage.getItem('username');
         $.ajax({
@@ -25,7 +55,7 @@ $(document).ready(function(){
                    sessionStorage.removeItem(username);
             },
             error: function(){
-              alert('Neuspena akcija');
+              console.log('Neuspena akcija');
             }
           });
     });
@@ -37,7 +67,7 @@ $(document).ready(function(){
     $('#send').click(function(){
         let receiverUsername = $('#receiver').val();
         let subject = 'Welcome';
-        let content = $('#message').val();
+        let content = currentUsername + ': ' + $('#message').val();
         let messageDetails = JSON.stringify({receiverUsername, subject, content});
         if(receiverUsername === ''){
             $.ajax({
@@ -46,7 +76,7 @@ $(document).ready(function(){
                 data: messageDetails,
                 contentType:"application/json; charset=utf-8", 
                 success: function(){
-                    console.log('Message sent successfully');
+                    $('#message-panel').append(content + '\n');
                     $('#message').val('');
                 },
                 error: function(err){
@@ -60,7 +90,7 @@ $(document).ready(function(){
                 data: messageDetails,
                 contentType:"application/json; charset=utf-8", 
                 success: function(){
-                    console.log('Message sent successfully');
+                    $('#message-panel').append(content + '\n');
                     $('#message').val('');
                 },
                 error: function(err){
@@ -78,15 +108,13 @@ $(document).ready(function(){
     var host = "ws://localhost:8080/WAR2020/ws/" + username;
     try{
 	    socket = new WebSocket(host);
-	    console.log('connect: Socket Status: '+socket.readyState);
 	
 	    socket.onopen = function(){
-	   	 console.log('onopen: Socket Status: '+socket.readyState+' (open)');
+
 	    }
 	
 	    socket.onmessage = function(msg){
             $('#message-panel').append(msg.data + '\n');
-	   	 console.log('Received: '+ msg.data);
 	    }
 	
 	    socket.onclose = function(){
@@ -105,7 +133,6 @@ try{
     usersSocket = new WebSocket(usersHost);
     
     usersSocket.onopen = function(){
-    	console.log('Ulogovan sam');
     }
     
     usersSocket.onmessage = function(msg){
@@ -126,11 +153,9 @@ try{
     logoutSocket = new WebSocket(logoutHost);
     
     logoutSocket.onopen = function(){
-    	// console.log('Izlogovan sam');
     }
     
     logoutSocket.onmessage = function(msg){
-        console.log('Izlogovan korisnik: ' + msg.data);
         $('#' + msg.data).remove();
     }
 

@@ -29,7 +29,8 @@ import ws.WSEndPoint;
 @LocalBean
 public class MessageBean {
 	private UserRepository userRepo = new UserRepository();
-	private MessageRepository messageRepo = new MessageRepository();
+	@EJB
+	private MessageRepository messageRepo;
 	@EJB
 	private WSEndPoint ws;
 	
@@ -45,9 +46,9 @@ public class MessageBean {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendMessageToUser(MessageDTO messageDTO, @Context HttpServletRequest request) {
 		Message message = formMessageOutOfDTO(messageDTO, request);
-		String username = messageDTO.getReceiverUsername();
-		ws.sendMessageToSpecificUser(username, message.getContent());
-		messageRepo.addNewMessage(messageDTO.getReceiverUsername(), message);
+		String username = message.getSender().getUsername();
+		messageRepo.addNewMessage(username, message);
+		ws.sendMessageToSpecificUser(messageDTO.getReceiverUsername(), message.getContent());
 		
 		return Response.status(200).build();
 	}
@@ -57,6 +58,7 @@ public class MessageBean {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendMessageToAllUsers(MessageDTO messageDTO, @Context HttpServletRequest request) {
 		Message message = formMessageOutOfDTO(messageDTO, request);
+		messageRepo.addBroadcastedMessageFromUser(message.getSender().getUsername(), message);
 		ws.echoTextMessage(message.getContent());
 		return Response.status(200).build();
 	}
