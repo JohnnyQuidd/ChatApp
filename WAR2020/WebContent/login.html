@@ -5,14 +5,19 @@
 	<script type="text/javascript" src="js/login.js"></script>
 	<title>Login Chat App</title>
 	<link rel="stylesheet" href="css/login.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+	<script src="css/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1 id="login">Login</h1>
-	<div id="data">
-		<input type="text" id="username" placeholder="Username">
-		<input type="password" id="password" placeholder="Password">
-		<button id="loginButton">Login</button>
-		<p id="register">Don't have an account? <a href="registration.html">Regiser!</a></p>
+	<div class="jumbotron" style="text-align: center;">
+		<h1 class="display-4" id="login">Login</h1>
+		<div id="data">
+			<input class="form-control" type="text" id="username" placeholder="Username">
+			<input class="form-control" type="password" id="password" placeholder="Password">
+			<button class="btn btn-primary" id="loginButton">Login</button>
+			<p id="register">Don't have an account? <a href="registration.html">Regiser!</a></p>
+		</div>
 	</div>
 </body>
 </html>

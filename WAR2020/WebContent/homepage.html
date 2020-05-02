@@ -4,26 +4,35 @@
 	<script src="js/jquery-1.11.0.js"></script>
 	<script type="text/javascript" src="js/homepage.js"></script>
 	<title>Chat App</title>
-	<link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <script src="css/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <script src="css/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <h1 id="title">Chat with anyone</h1>
-    <div id="conent">
-        <textarea id="message-panel" readonly></textarea>
-        <button id="clear">Clear messages</button>
-        <input type="text" id="receiver" placeholder="Receiver username (sent to all if left blank)">
-        <input type="text" id="message" placeholder="Your message...">
-        <button id="send">Send Message</button>
-    </div>
+    <div class="jumbotron" style="text-align: center;">
+        <h1 class="display-4" id="title">Chat with anyone</h1>
+        <div id="conent">
+            <textarea class="form-control" id="message-panel" readonly></textarea>
+            <button class="btn btn-secondary" id="clear"><i class="fa fa-trash"></i> Clear messages</button>
+            <input class="form-control" type="text" id="receiver" placeholder="Receiver username (sent to all if left blank)">
+            <input class="form-control" type="text" id="subject" placeholder="Subject">
+            <input class="form-control" type="text" id="message" placeholder="Your message...">
+            <button class="btn btn-primary" id="send"><i class="fa fa-send"></i> Send Message</button>
+        </div>
 
-    <div id="onlineUsers">
-        <h2>Online members</h2>
+        <div id="onlineUsers">
+            <h2>Online members</h2>
+        </div>
+        <hr>
+        <div id="registeredUsers">
+            <h2>All registered users</h2>
+        </div>
+        <hr>
+        <button class="btn btn-danger" id="logout">Logout</button>
     </div>
-    <hr>
-    <div id="registeredUsers">
-        <h2>All registered users</h2>
-    </div>
-    <hr>
-    <button id="logout">Logout</button>
 </body>
 </html>

@@ -7,7 +7,7 @@ $(document).ready(function(){
         success: function(data) {
             for(var i = 0; i < data.length; i++){
                if(data[i].username !== currentUsername){
-                    $('#onlineUsers').append('<p id="' + data[i].username + '">' + data[i].username + '</p>');
+                    $('#onlineUsers').append('<p id="' + data[i].username + '" class="user"><i class="fa fa-user"> ' + data[i].username + '</p>');
                }
             }
         },
@@ -22,7 +22,7 @@ $(document).ready(function(){
         type: 'GET',
         success: function(data) {
             for(var i = 0; i < data.length; i++){
-                $('#registeredUsers').append('<p id="' + data[i].username + '">' + data[i].username + '</p>');
+                $('#registeredUsers').append('<p id="' + data[i].username + '" class="user"><i class="fa fa-user"> ' + data[i].username + '</p>');
             }
         },
         error: function(){
@@ -36,7 +36,6 @@ $(document).ready(function(){
         type: 'GET',
         success: function(data) {
             for(var i = 0; i < data.length; i++){
-                //$('#message-panel').append('<p id="' + data[i].username + '">' + data[i].username + '</p>');
                 $('#message-panel').append(data[i].content + '\n');
             }
         },
@@ -66,7 +65,7 @@ $(document).ready(function(){
 
     $('#send').click(function(){
         let receiverUsername = $('#receiver').val();
-        let subject = 'Welcome';
+        let subject = $('#subject').val();
         let content = currentUsername + ': ' + $('#message').val();
         let messageDetails = JSON.stringify({receiverUsername, subject, content});
         if(receiverUsername === ''){
@@ -114,7 +113,7 @@ $(document).ready(function(){
 	    }
 	
 	    socket.onmessage = function(msg){
-            $('#message-panel').append(msg.data + '\n');
+            $('#message-panel').append('<p class="messageInstance">' + msg.data + '\n' + "</p>");
 	    }
 	
 	    socket.onclose = function(){

@@ -1,81 +1,67 @@
-body {
-	background: #A5E5F2;
+.jumbotron {
+    width: 75%;
+    margin-left: 15%;
+    margin-right: 15%;
+    background-color: transparent !important;
 }
 
 #title {
-    text-align: center;
-    font-size: 35px;
-    font-weight: 400px;
+    margin-bottom: 30px;
+    font-weight: 400;
 }
 
-#content {
-    margin-top: 50px;
-    text-align: center;
-    width: 50%;
-}
-
-#message-panel{
+#message-panel {
+    margin-top: 10px;
+    background-color: #EAE6DA;
+    margin-bottom: 5px;
     height: 200px;
-    width: 50%;
-    margin-left: 25%;
 }
 
 #clear {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 30px;
-    width: 10%;
+    width: 100%;
+    margin-bottom: 55px;
 }
 
 #receiver {
-    height: 25px;
-    width: 50%;
-    margin-left: 25%;
+    margin-bottom: 5px;
+}
+
+#subject {
     margin-bottom: 5px;
 }
 
 #message {
-    height: 25px;
-    width: 50%;
-    margin-left: 25%;
+    margin-bottom: 5px;
+}
+
+#messageInstance {
+    font-weight: 300;
+    font-size: 15px;
 }
 
 #send {
+    width: 100%;
     margin-top: 10px;
-    margin-left: 25%;
-    text-align: center;
-    height: 30px;
-    width: 50%;
-    border-radius: 2%;
+    margin-bottom: 100px;
 }
 
 #onlineUsers {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#onlineUsers h2{
-    font-weight: 600;
-    font-size: 30px;
+    margin-top: 10px;
+    font-weight: 300;
+    margin-bottom: 50px;
 }
 
 #registeredUsers {
     margin-top: 20px;
-    text-align: center;
+    font-weight: 300;
+    margin-bottom: 30px;
 }
 
-#registeredUsers h2{
-    font-weight: 600;
-    font-size: 30px;
-}
-
-#onlineUsers p{
+.user {
     font-weight: 300;
     font-size: 20px;
 }
 
 #logout {
-	margin-top: 30px;
-    height: 25px;
-    width: 100px;
+    width: 100%;
 }

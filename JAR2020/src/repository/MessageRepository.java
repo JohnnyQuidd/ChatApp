@@ -18,13 +18,9 @@ import model.Message;
 @LocalBean
 public class MessageRepository {
 	private HashMap<String, ArrayList<Message>> messages = new HashMap<>();
-	private UserRepository userRepo = new UserRepository();
 	
 	public MessageRepository() {
-		ArrayList<Message> message = new ArrayList<Message>();
-//		message.add(new Message(userRepo.findUserByUsername("admin"), userRepo.findUserByUsername("guest"),
-//				"Welcome", LocalDateTime.now(), "Welcome to our new Chat App"));
-//		messages.put("guest", message);
+		messages = new HashMap<String, ArrayList<Message>>();
 	}
 	
 	public ArrayList<Message> messagesForUser(String username){
@@ -63,7 +59,6 @@ public class MessageRepository {
 			messages = (HashMap<String, ArrayList<Message>>) in.readObject();
 			in.close();
 			fileInput.close();
-			System.out.println("Messages read from a file");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -81,7 +76,6 @@ public class MessageRepository {
 	         out.writeObject(messages);
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in messages.t");
 	      } catch (IOException i) {
 	         i.printStackTrace();
 	      }
