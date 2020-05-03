@@ -28,7 +28,8 @@ import ws.WSEndPoint;
 @Path("/messages")
 @LocalBean
 public class MessageBean {
-	private UserRepository userRepo = new UserRepository();
+	@EJB
+	private UserRepository userRepo;
 	@EJB
 	private MessageRepository messageRepo;
 	@EJB
@@ -58,8 +59,8 @@ public class MessageBean {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendMessageToAllUsers(MessageDTO messageDTO, @Context HttpServletRequest request) {
 		Message message = formMessageOutOfDTO(messageDTO, request);
-		messageRepo.addBroadcastedMessageFromUser(message.getSender().getUsername(), message);
-		ws.echoTextMessage(message.getContent());
+		messageRepo.addBroadcastedMessageFromUser(messageDTO.getSenderUsername(), message);
+		ws.broadcastMessageToAllUsersExceptSender(messageDTO.getSenderUsername(), message.getContent());
 		return Response.status(200).build();
 	}
 	

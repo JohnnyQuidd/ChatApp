@@ -2,17 +2,21 @@ package repository;
 
 import java.util.ArrayList;
 
-import javax.ejb.Stateless;
+import javax.ejb.LocalBean;
+import javax.ejb.Singleton;
 
 import model.User;
 
-@Stateless
+@Singleton
+@LocalBean
 public class UserRepository {
 	private ArrayList<User> listOfUsers = new ArrayList<User>();
 	
 	public UserRepository() {
-		listOfUsers.add(new User("admin", "admin"));
-		listOfUsers.add(new User("guest", "guest"));
+		if(listOfUsers == null || listOfUsers.isEmpty()) {
+			listOfUsers.add(new User("admin", "admin"));
+			listOfUsers.add(new User("guest", "guest"));
+		}
 	}
 	
 	public ArrayList<User> getAllRegisteredUsers() {

@@ -4,12 +4,14 @@ public class MessageDTO {
 	private String receiverUsername;
 	private String subject;
 	private String content;
+	private String senderUsername;
 	
-	public MessageDTO(String receiverUsername, String subject, String content) {
+	public MessageDTO(String receiverUsername, String subject, String content, String senderUsername) {
 		super();
 		this.receiverUsername = receiverUsername;
 		this.subject = subject;
 		this.content = content;
+		this.senderUsername = senderUsername;
 	}
 	
 	public MessageDTO() {}
@@ -37,6 +39,16 @@ public class MessageDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	public String getSenderUsername() {
+		return senderUsername;
+	}
+
+	public void setSenderUsername(String senderUsername) {
+		this.senderUsername = senderUsername;
+	}
+	
+	
 	
 	
 }

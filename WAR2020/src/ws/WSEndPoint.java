@@ -63,5 +63,18 @@ public class WSEndPoint {
 			e.printStackTrace();
 		}
 	}
+	
+	public void broadcastMessageToAllUsersExceptSender(String username, String message) {
+		for(String s : sessions.keySet()) {
+			if(!s.equals(username)) {
+				try {
+					sessions.get(s).getBasicRemote().sendText(message);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 }

@@ -67,7 +67,8 @@ $(document).ready(function(){
         let receiverUsername = $('#receiver').val();
         let subject = $('#subject').val();
         let content = currentUsername + ': ' + $('#message').val();
-        let messageDetails = JSON.stringify({receiverUsername, subject, content});
+        let senderUsername = currentUsername;
+        let messageDetails = JSON.stringify({receiverUsername, subject, content, senderUsername});
         if(receiverUsername === ''){
             $.ajax({
                 url: 'rest/messages/all',
@@ -113,7 +114,8 @@ $(document).ready(function(){
 	    }
 	
 	    socket.onmessage = function(msg){
-            $('#message-panel').append('<p class="messageInstance">' + msg.data + '\n' + "</p>");
+            console.log(msg.data);
+            $('#message-panel').append(msg.data + '\n');
 	    }
 	
 	    socket.onclose = function(){

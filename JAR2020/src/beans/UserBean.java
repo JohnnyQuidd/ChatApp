@@ -31,7 +31,8 @@ import ws.UserLogoutEndPoint;
 @LocalBean
 public class UserBean {
 	private HashMap<String, Session> sessions = new HashMap<>();
-	private UserRepository userRepo = new UserRepository();
+	@EJB
+	private UserRepository userRepo;
 	@EJB
 	private UserLoginEndPoint userSocket;
 	@EJB
